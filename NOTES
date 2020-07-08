@@ -1,63 +1,16 @@
 Plans and Structure:
 
 1. CLI
-    "Hello, Welcome to Taste Of The World."
-    ---------------------------------------
-    1. Mexican Recipes
-    2. Italian Recipes
-    3. Chinese Recipes
-    4. Indian Recipes
-    5. Thai Recipes
-    6. etc.
-    7. etc.
-    ---------------------------------------
-    "Please select a cuisine you'd like to make."
-    user input: 1
+  - finish CLI
 
-    "What kind of dish would you like to make?"
-    ------------------------------------------
-    1. Authentic Mexican Recipes
-    2. Mexican Appetizers
-    3. Mexican Main Dishes
-    4. Mexican Drinks
-    5. Mexican Deserts
-    6. etc.
-    ------------------------------------------
-    "Please select the kind of dish you'd like to make."
-    user input: 1
+2. Scraper
+  - keep scraper simple. Let Recipes handle most of code
 
-    "Select a recipe you'd like to view"
-    -----------------------------------------
-    1. enchiladas
-    2. tacos
-    3. churros
-    4. carne asada
-    5. etc.
-    -----------------------------------------
-    user input: 1
+RECORD THIS PART(30 minutes)
+3. Recipes class
+  - alot to do here.
 
-    ----------------------------------------
-    NAME: Enchiladas
-    Chef: PattiVerde
-    Rating: 4.7
-    Number of Ratings: 400
-    Short Description: "these are delicious"
-    -----------------Basic info---------------
-    Prep: 45 min
-    Cook: 35 min
-    servings: 4
-    -----------------Ingredients-------------
-    2 chicken
-    etc.
-    -----------------Directions---------------
-    step 1
-    Cook ingredients
+4. test and clean code
+  - build enviroment folder
 
-    step 2
-    etc.
-    -----------------Nutrition Facts---------------
-    Per Serving:
-    559.4 calories; 37.1 g protein; 48.9 g carbohydrates; 84 mg cholesterol; 1344 mg sodium.
-    -----------------------------------------------
-    "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
-    
+5. Be ready to explain everything involved with code, the how and why.
