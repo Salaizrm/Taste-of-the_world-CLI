@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require './lib/tasteoftheworld'
+#=> This is requiring tasteoftheworld.rb
+
+TasteOfTheWorld::CLI.new.start
+#=> This should Start The Program.
