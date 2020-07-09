@@ -2,7 +2,7 @@ class TasteOfTheWorld::CLI
 
   def start
     #=> I want this to call TasteOfTheWorld::Scraper to scrape the most recent data
-    # list_cuisines (DO NOT HARD CODE menu)
+    # list_cuisines (DO NOT HARD CODE menu
     menu
   end
 
@@ -93,7 +93,7 @@ class TasteOfTheWorld::CLI
     # "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
   end
 
-  def print_cuisine
+  def self.print_cuisine
     puts("Hello, Welcome to Taste Of The World.")
     puts ---------------------------------------
     TasteOfTheWorld::Recipes.cuisine.each.with_index do |cuisine, index|
