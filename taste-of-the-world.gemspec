@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "taste/of/the/world/version"
+require "./lib/taste_of_the_world/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "taste-of-the-world"
-  spec.version       = Taste::Of::The::World::VERSION
+  spec.version       = TasteOfTheWorld::VERSION
   spec.authors       = ["'Robert Salaiz'"]
   spec.email         = ["'work.salaizrm@gmail.com'"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Here is a summary until i write a better one.}
+  spec.description   = %q{Here is a description until i write a better one.}
+  spec.homepage      = "https://github.com/Salaizrm/taste-of-the-world-CLI"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.

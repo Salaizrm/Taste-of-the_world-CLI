@@ -62,7 +62,7 @@ class TasteOfTheWorld::CLI
     # -----------------------------------------
     input = gets.strip
 
-    r = TasteOfTheWorld::Recipes.recipes.find(input.to_i)
+    r = TasteOfTheWorld::Recipes.full_recipe.find(input.to_i)
 
     print_recipe(r)
     #=> recipes will vary from first, second and third option.
@@ -155,6 +155,28 @@ class TasteOfTheWorld::CLI
   end
 
   def print_recipe(r)
+    puts <<-RECIPE
+    -----------------------------------------
+    NAME: #{r.name}
+    Chef: #{r.chef}
+    Rating: #{r.rating}
+    Number of Ratings: #{r.n_ratings}
+    Description: #{r.description}
+    -----------------Basic info--------------
+    Prep: #{r.prep_time}
+    Cook: #{r.cook_time}
+    servings: #{r.servings}
+    -----------------Ingredients-------------
+    #{r.ingredientse}
+    -----------------Directions--------------
+    #{r.directions}
+    -----------------Nutrition Facts---------
+    Per Serving: #{r.nutrition}
+    -----------------------------------------
+    "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
+    RECIPE
+
+
     #=> recipes will vary from first, second and third option.
     # -----------------------------------------
     # NAME: Enchiladas
