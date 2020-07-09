@@ -18,6 +18,7 @@ class TasteOfTheWorld::CLI
         end
       end
     end
+  end
 
   def menu
     controls
@@ -94,13 +95,13 @@ class TasteOfTheWorld::CLI
 
   def print_cuisine
 
-    puts "Hello, Welcome to Taste Of The World."
+    puts("Hello, Welcome to Taste Of The World.")
     puts ---------------------------------------
     TasteOfTheWorld::Recipes.cuisine.each.with_index do |cuisine, index|
       puts "#{index}. #{cuisine}"
     end
     puts ---------------------------------------
-    puts "Please select a cuisine you'd like to make."
+    puts("Please select a cuisine you'd like to make.")
 
     #=> Should look like this when finished.
     # "Hello, Welcome to Taste Of The World."
@@ -112,8 +113,6 @@ class TasteOfTheWorld::CLI
     # 5. Thai Recipes
     # ---------------------------------------
     # "Please select a cuisine you'd like to make."
-
-
   end
 
   def print_dishes(dish)
@@ -124,7 +123,7 @@ class TasteOfTheWorld::CLI
       puts "#{index}. #{d}"
     end
     puts ------------------------------------------
-    puts "Please select the kind of dish you'd like to make."
+    puts("Please select the kind of dish you'd like to make.")
     #=> dishes will vary by the first option selected.
     # "What kind of dish would you like to make?"
     # ------------------------------------------
@@ -152,7 +151,6 @@ class TasteOfTheWorld::CLI
     # 3. churros
     # 4. carne asada
     # -----------------------------------------
-  end
 
   def print_recipe(r)
     puts <<-RECIPE
@@ -175,8 +173,6 @@ class TasteOfTheWorld::CLI
     -----------------------------------------
     "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
     RECIPE
-
-
     #=> recipes will vary from first, second and third option.
     # -----------------------------------------
     # NAME: Enchiladas
