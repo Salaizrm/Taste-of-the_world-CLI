@@ -2,7 +2,6 @@ class TasteOfTheWorld::Scraper
 
   def self.get_page
     doc = Nokogiri::HTML(open("https://www.allrecipes.com/recipes/86/world-cuisine/"))
-    cod = Nokogiri::HTML(open("https://www.theworlds50best.com/list/1-50-winners"))
     binding.pry
   end
 
@@ -16,6 +15,7 @@ class TasteOfTheWorld::Scraper
 
 
 end
+# cod = Nokogiri::HTML(open("https://www.theworlds50best.com/list/1-50-winners"))
 # self.get_page.css("div[data-list='1-50'] a.item")
 # <div data-list="1-50"
 # <span class="category-title ng-isolate-scope" data-ellipsis="">Mexican Recipes</span>

@@ -94,7 +94,6 @@ class TasteOfTheWorld::CLI
   end
 
   def print_cuisine
-
     puts("Hello, Welcome to Taste Of The World.")
     puts ---------------------------------------
     TasteOfTheWorld::Recipes.cuisine.each.with_index do |cuisine, index|
@@ -102,17 +101,6 @@ class TasteOfTheWorld::CLI
     end
     puts ---------------------------------------
     puts("Please select a cuisine you'd like to make.")
-
-    #=> Should look like this when finished.
-    # "Hello, Welcome to Taste Of The World."
-    # ---------------------------------------
-    # 1. Mexican Recipes
-    # 2. Italian Recipes
-    # 3. Chinese Recipes
-    # 4. Indian Recipes
-    # 5. Thai Recipes
-    # ---------------------------------------
-    # "Please select a cuisine you'd like to make."
   end
 
   def print_dishes(dish)
