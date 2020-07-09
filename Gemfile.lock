@@ -23,7 +23,7 @@ DEPENDENCIES
   bundler (~> 2.0)
   nokogiri
   pry
-  rake (>= 12.3.3)
+  rake (>= 13.0.1)
   taste-of-the-world!
 
 BUNDLED WITH

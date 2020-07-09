@@ -5,26 +5,22 @@ class TasteOfTheWorld::Scraper
   end
 
   def self.cuisines
-    self.get_page.css("div[class='grid slider'] a").each do |a|
-      cuisine = a.text.strip
-      TasteOfTheWorld::Recipes.new(cuisine)
+    doc = self.get_page.css("div[class='grid slider'] a").map do |r|
+      cuisine = r.text.strip
+      url = r['href']
+      TasteOfTheWorld::Recipes.new(cuisine, url)
     end
-     url = self.get_page.css("div[class='grid slider'] a").map {|link| link['href']}
-      TasteOfTheWorld::Recipes.new(url)
+    doc
     binding.pry
-    #=> This should grab name("mexican recipes") and url ("https://www.allrecipes.com/recipes/728/world-cuisine/latin-american/mexican/")
-    #THIS GRABS ALL URL's doc.css("div[class='grid slider'] a").map { |link| link['href'] }
+  #=> This should grab name("mexican recipes") and url ("https://www.allrecipes.com/recipes/728/world-cuisine/latin-american/mexican/")
+  #THIS GRABS ALL URL's get_page.css("div[class='grid slider'] a").map { |link| link['href'] }
   end
 
-
-
   def self.get_dishes
+
   end
 
 
 end
-# cod = Nokogiri::HTML(open("https://www.theworlds50best.com/list/1-50-winners"))
-# self.get_page.css("div[data-list='1-50'] a.item")
-# <div data-list="1-50"
-# <span class="category-title ng-isolate-scope" data-ellipsis="">Mexican Recipes</span>
-# cuisine = doc.css("div[class='grid slider'] span")
+#cuisine names: .css("div[class='grid slider'] a")
+#cuisine URLs: .css("div[class='grid slider'] a").map {|link| url = link['href']}
