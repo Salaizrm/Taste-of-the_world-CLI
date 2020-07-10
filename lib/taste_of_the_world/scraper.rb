@@ -1,21 +1,12 @@
 module TasteOfTheWorld
   class Scraper
 
-    def self.get_page
+    def self.get_category
       Nokogiri::HTML(open("https://www.allrecipes.com/recipes/86/world-cuisine/"))
     end
 
-    def self.cuisines
-      @category = []
-    doc = self.get_page.css("div[class='grid slider'] a").each do |r|
-        category = r.text.strip
-        @category << category
-      end
-      puts("Hello, Welcome to Taste Of The World.")
-      @category.each.with_index(1) do |name, index|
-        puts "#{index}. #{name}"
-      end
-      puts("Please select a cuisine you'd like to make.")
+    def self.get_style(category_url)
+      Nokogiri::HTML(open("#{category_url}"))
     end
 
     def self.get_recipe(recipe="https://www.allrecipes.com/recipe/213700/enchiladas-verdes/")
@@ -33,7 +24,6 @@ module TasteOfTheWorld
         nutrition = r.css("section[class='nutrition-section container']").text.strip.gsub(/\s+/,' ')
         TasteOfTheWorld::Cuisine.new(name,rating,description,info,ingredients,directions,nutrition)
       end
-      doc
-      binding.pry
     end
+  end
 end

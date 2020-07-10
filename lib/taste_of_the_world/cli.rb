@@ -2,8 +2,6 @@ module TasteOfTheWorld
   class CLI
 
     def start
-      #=> I want this to call TasteOfTheWorld::Scraper to scrape the most recent data
-      # list_cuisines (DO NOT HARD CODE menu)
       menu
     end
 
@@ -11,69 +9,58 @@ module TasteOfTheWorld
       TasteOfTheWorld::Scraper
     end
 
-
-    def controls
-      @input = nil
-      while @input != "exit"
-        @input = gets.strip.downcase
-        case @input
-          when "menu"
-            menu
-          when "exit"
-            puts "goodbye"
-          when "1"
-            styles
-          end
-        end
-      end
-
     def menu
       scrape
-      print_cuisine
-      controls
-
-
+      puts"Hello, Welcome to Taste Of The World."
+      puts"-------------------------------------"
+      print_categories
+      puts"-------------------------------------"
+      puts"Please select a cuisine you'd like to make."
       # "Hello, Welcome to Taste Of The World."
+
       # "Please select a cuisine you'd like to make."
 
+
+      input = gets.strip.to_i
+      category_url = @category_url[input-1]
+      puts"Please Select a style of dish to make."
+      puts"-------------------------------------"
+      print_style(category_url)
+      puts"-------------------------------------"
+
+
+
       # #=> dishes will vary by the first option selected.
-      # # "What kind of dish would you like to make?"
-      # # ------------------------------------------
-      # # 1. Authentic Mexican Recipes
-      # # 2. Mexican Appetizers
-      # # 3. Mexican Main Dishes
-      # # 4. Mexican Drinks
-      # # 5. Mexican Deserts
-      # # ------------------------------------------
       # # "Please select the kind of dish you'd like to make."
-      # input = gets.strip
-      #
-      # recipes = TasteOfTheWorld::Recipes.recipes.find(input.to_i)
-      #
-      # print_recipes(recipes)
 
     end
 
-    def print_cuisine
-      TasteOfTheWorld::Scraper.cuisines
-    end
-
-    def print_style(style)
-      puts ("What kind of style would you like to make?")
-      TasteOfTheWorld::Cuisine.all.each.with_index(1) do |name, index|
-        puts "#{index}. #{name.style}"
+    def print_categories
+      @category = []
+      @category_url = []
+    TasteOfTheWorld::Scraper.get_category.css("div[class='grid slider'] a").each do |r|
+        category = r.text.strip
+        category_url = r['href']
+        @category << category
+        @category_url << category_url
       end
-      puts("Please select the kind of dish you'd like to make.")
-      #=> dishes will vary by the first option selected.
-      # "What kind of dish would you like to make?"
-      # ------------------------------------------
-      # 1. Authentic Mexican Recipes
-      # 2. Mexican Appetizers
-      # 3. Mexican Main Dishes
-      # 4. Mexican Drinks
-      # 5. Mexican Deserts
-      # ------------------------------------------
-      # "Please select the kind of dish you'd like to make."
+      @category.each.with_index(1) do |name, index|
+        puts "#{index}. #{name}"
+      end
+    end
+
+    def print_style(category_url)
+      @style = []
+      @style_url = []
+    TasteOfTheWorld::Scraper.get_style(category_url).css("div[class='grid slider'] a").each do |r|
+        style = r.text.strip
+        style_url = r['href']
+        @style << style
+        @style_url << style_url
+      end
+      @style.each.with_index(1) do |name, index|
+        puts "#{index}. #{name}"
+      end
     end
 
     # def print_recipes(recipes)
