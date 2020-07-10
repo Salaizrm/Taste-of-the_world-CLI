@@ -7,11 +7,16 @@ module TasteOfTheWorld
       menu
     end
 
+    def scrape
+      TasteOfTheWorld::Scraper.cuisines
+    end
+
+
     def controls
-      input = nil
-      while input != "exit"
-        input = gets.strip.downcase
-        case input
+      @input = nil
+      while @input != "exit"
+        @input = gets.strip.downcase
+        case @input
           when "menu"
             menu
           when "exit"
@@ -21,24 +26,18 @@ module TasteOfTheWorld
       end
 
     def menu
-      TasteOfTheWorld::Scraper.new
-      controls
+      scrape
       print_cuisine
-      #=> This info will always be available as its scraped from the index, meaning theses cuisines are always a constant, but still shouldnt be hard coded.
-      # "Hello, Welcome to Taste Of The World."
-      # ---------------------------------------
-      # 1. Mexican Recipes
-      # 2. Italian Recipes
-      # 3. Chinese Recipes
-      # 4. Indian Recipes
-      # 5. Thai Recipes
-      # ---------------------------------------
-      # "Please select a cuisine you'd like to make."
-      input = gets.strip
+      controls
 
-      # dish = TasteOfTheWorld::Recipes.dishes.find(input.to_i)
-      #
-      # print_dishes(dish)
+      # "Hello, Welcome to Taste Of The World."
+      # "Please select a cuisine you'd like to make."
+      @input = gets.strip
+
+      dish = TasteOfTheWorld::Cuisine.find(@input.to_i)
+
+      print_dishes(dish)
+
       # #=> dishes will vary by the first option selected.
       # # "What kind of dish would you like to make?"
       # # ------------------------------------------
@@ -59,32 +58,29 @@ module TasteOfTheWorld
 
     def print_cuisine
       puts("Hello, Welcome to Taste Of The World.")
-      TasteOfTheWorld::Recipes.all.each.with_index do |cuisine, index|
-        puts "#{index}. #{cuisine}"
+      TasteOfTheWorld::Scraper.cuisines.each.with_index(1) do |name, index|
+        puts "#{index}. #{name}"
       end
       puts("Please select a cuisine you'd like to make.")
     end
 
-    # def print_dishes(dish)
-    #
-    #   puts "What kind of dish would you like to make?"
-    #   puts ------------------------------------------
-    #   TasteOfTheWorld::Recipes.each.with_index(dish) do |d, index|
-    #     puts "#{index}. #{d}"
-    #   end
-    #   puts ------------------------------------------
-    #   puts("Please select the kind of dish you'd like to make.")
-    #   #=> dishes will vary by the first option selected.
-    #   # "What kind of dish would you like to make?"
-    #   # ------------------------------------------
-    #   # 1. Authentic Mexican Recipes
-    #   # 2. Mexican Appetizers
-    #   # 3. Mexican Main Dishes
-    #   # 4. Mexican Drinks
-    #   # 5. Mexican Deserts
-    #   # ------------------------------------------
-    #   # "Please select the kind of dish you'd like to make."
-    # end
+    def print_dishes(dish)
+      puts ("What kind of dish would you like to make?")
+      TasteOfTheWorld::Cuisine.all.each.with_index(1) do |name, index|
+        puts "#{index}. #{name.dishes}"
+      end
+      puts("Please select the kind of dish you'd like to make.")
+      #=> dishes will vary by the first option selected.
+      # "What kind of dish would you like to make?"
+      # ------------------------------------------
+      # 1. Authentic Mexican Recipes
+      # 2. Mexican Appetizers
+      # 3. Mexican Main Dishes
+      # 4. Mexican Drinks
+      # 5. Mexican Deserts
+      # ------------------------------------------
+      # "Please select the kind of dish you'd like to make."
+    end
 
     # def print_recipes(recipes)
     #   puts "Select a recipe you'd like to view"

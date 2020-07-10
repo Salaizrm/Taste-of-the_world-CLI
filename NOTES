@@ -19,4 +19,11 @@ RECORD THIS PART(30 minutes)
 Where I left off:
 Close to finishing first part that grabs cuisines and list them.
 Cant run program, error is saying taste-of-the-world-CLI/lib/taste_of_the_world/scraper.rb:1:in `<top (required)>': uninitialized constant TasteOfTheWorld (NameError).
-need to schedule one on one or join zoom class. 
+need to schedule one on one or join zoom class.
+
+#choose category => choose style => choose recipe => full recipe(PRIORITY)
+
+#hard code menus
+#store urls into hashes
+
+"#{"k"=}, v"
