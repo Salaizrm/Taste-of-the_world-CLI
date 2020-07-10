@@ -32,6 +32,7 @@ module TasteOfTheWorld
       style_url = @style_url[input-1]
       puts"Select a recipe you'd like to make"
       puts"-------------------------------------"
+      print_recipes(style_url)
 
 
 
@@ -71,8 +72,8 @@ module TasteOfTheWorld
     def print_recipes(style_url)
       @recipes = []
       @recipes_url = []
-    TasteOfTheWorld::Scraper.get_recipes(style_url).css("div[class='grid slider'] a").each do |r|
-        recipes = r.text.strip
+    TasteOfTheWorld::Scraper.get_recipes(style_url).css("div[class='fixed-recipe-card__info']").each do |r|
+        recipes = r.text.strip.gsub(/\s+/,' ')
         recipes_url = r['href']
         @recipes << recipes
         @recipes_url << recipes_url
@@ -81,14 +82,6 @@ module TasteOfTheWorld
         puts "#{index}. #{name}"
       end
     end
-      #=> list 0f available recipes will vary from the first and second option.
-      # "Select a recipe you'd like to view"
-      # -----------------------------------------
-      # 1. enchiladas
-      # 2. tacos
-      # 3. churros
-      # 4. carne asada
-      # -----------------------------------------
 
     def print_recipe(r)
       puts <<-RECIPE
@@ -108,31 +101,6 @@ module TasteOfTheWorld
       "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
       RECIPE
     end
-      #=> recipes will vary from first, second and third option.
-    #   # -----------------------------------------
-    #   # NAME: Enchiladas
-    #   # Chef: PattiVerde
-    #   # Rating: 4.7
-    #   # Number of Ratings: 400
-    #   # Short Description: "these are delicious"
-    #   # -----------------Basic info--------------
-    #   # Prep: 45 min
-    #   # Cook: 35 min
-    #   # servings: 4
-    #   # -----------------Ingredients-------------
-    #   # 2 chicken
-    #   # etc.
-    #   # -----------------Directions--------------
-    #   # step 1
-    #   # Cook ingredients
-    #   #
-    #   # step 2
-    #   # etc.
-    #   # -----------------Nutrition Facts---------
-    #   # Per Serving:
-    #   # 559.4 calories; 37.1 g protein; 48.9 g carbohydrates; 84 mg cholesterol; 1344 mg sodium.
-    #   # -----------------------------------------
-    #   # "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
-    #
+
   end
 end

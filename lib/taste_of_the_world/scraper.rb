@@ -9,12 +9,16 @@ module TasteOfTheWorld
       Nokogiri::HTML(open("#{category_url}"))
     end
 
-    def self.get_recipe(recipe="https://www.allrecipes.com/recipe/213700/enchiladas-verdes/")
+    def self.get_recipes(recipes_url)
+      Nokogiri::HTML(open("#{recipes_url}"))
+    end
+
+    def self.get_recipe(recipe)
       Nokogiri::HTML(open("#{recipe}"))
     end
 
     def self.recipe
-      doc = self.get_recipe.css("div[class='recipe-content two-col-content karma-main-column']").map do |r|
+      self.get_recipe(recipe).css("div[class='recipe-content two-col-content karma-main-column']").map do |r|
         name = r.css("h1").text
         rating = r.css("span[class='review-star-text']").first.text.strip
         description = r.css("p[class='margin-0-auto']").text
