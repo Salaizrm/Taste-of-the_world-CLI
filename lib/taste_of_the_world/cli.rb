@@ -28,6 +28,11 @@ module TasteOfTheWorld
       print_style(category_url)
       puts"-------------------------------------"
 
+      input = gets.strip.to_i
+      style_url = @style_url[input-1]
+      puts"Select a recipe you'd like to make"
+      puts"-------------------------------------"
+
 
 
       # #=> dishes will vary by the first option selected.
@@ -63,12 +68,19 @@ module TasteOfTheWorld
       end
     end
 
-    # def print_recipes(recipes)
-    #   puts "Select a recipe you'd like to view"
-    #   puts -----------------------------------------
-    #   TasteOfTheWorld::Recipes.each.with_index(recipes) do |recipe, index|
-    #     puts "#{index}. #{recipe}"
-    #   end
+    def print_recipes(style_url)
+      @recipes = []
+      @recipes_url = []
+    TasteOfTheWorld::Scraper.get_recipes(style_url).css("div[class='grid slider'] a").each do |r|
+        recipes = r.text.strip
+        recipes_url = r['href']
+        @recipes << recipes
+        @recipes_url << recipes_url
+      end
+      @recipes.each.with_index(1) do |name, index|
+        puts "#{index}. #{name}"
+      end
+    end
       #=> list 0f available recipes will vary from the first and second option.
       # "Select a recipe you'd like to view"
       # -----------------------------------------
