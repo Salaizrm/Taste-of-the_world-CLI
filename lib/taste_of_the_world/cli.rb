@@ -16,10 +16,6 @@ module TasteOfTheWorld
       print_categories
       puts"-------------------------------------"
       puts"Please select a cuisine you'd like to make."
-      # "Hello, Welcome to Taste Of The World."
-
-      # "Please select a cuisine you'd like to make."
-
 
       input = gets.strip.to_i
       category_url = @category_url[input-1]
@@ -34,10 +30,9 @@ module TasteOfTheWorld
       puts"-------------------------------------"
       print_recipes(style_url)
 
-
-
-      # #=> dishes will vary by the first option selected.
-      # # "Please select the kind of dish you'd like to make."
+      input = gets.strip.to_i
+      recipe = @recipes_url[input-1]
+      print_recipe(r)
 
     end
 
@@ -83,24 +78,24 @@ module TasteOfTheWorld
       end
     end
 
-    def print_recipe(r)
-      puts <<-RECIPE
-      -----------------------------------------
-      NAME: #{r.name}
-      Rating: #{r.rating}
-      Description: #{r.description}
-      -----------------Basic info--------------
-      INFO: #{r.info}
-      -----------------Ingredients-------------
-      #{r.ingredients}
-      -----------------Directions--------------
-      #{r.directions}
-      -----------------Nutrition Facts---------
-      #{r.nutrition}
-      -----------------------------------------
-      "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
-      RECIPE
+    def print_recipe(recipe)
+      TasteOfTheWorld::Cuisine.recipe(recipe).each do |r|
+      puts "-----------------------------------------"
+      puts "NAME: #{r.name}"
+      puts "Rating: #{r.rating}"
+      puts "Description: #{r.description}"
+      puts "-----------------Basic info--------------"
+      puts "INFO: #{r.info}"
+      puts "-----------------Ingredients-------------"
+      puts "#{r.ingredients}"
+      puts "-----------------Directions--------------"
+      puts "#{r.directions}"
+      puts "-----------------Nutrition Facts---------"
+      puts "#{r.nutrition}"
+      puts "-----------------------------------------"
+      puts "To return to the previous selections type return. To return to the main menu type menu. To close this application type exit"
     end
+  end
 
   end
 end
