@@ -1,14 +1,20 @@
 module TasteOfTheWorld
   class Cuisine
 
-    attr_accessor :category, :url_category, :style, :url_style, :name
+    attr_accessor :name, :rating, :description, :info, :ingredients, :directions, :nutrition
     # :name, :chef, :rating, :n_ratings, :description, :summary, :ingredients, :directions, :nutrition
     #=> Summary includes prep time, cooking time, and servings
 
     @@all = []
-    def initialize(url_category, category)
-      @url_category = url_category
-      @category = category
+
+    def initialize(name=nil,rating=nil,description=nil,info=nil,ingredients=nil,directions=nil,nutrition=nil)
+      @name = name
+      @rating = rating
+      @description = description
+      @info = info
+      @ingredients = ingredients
+      @directions = directions
+      @nutrition = nutrition
       @@all << self
     end
 

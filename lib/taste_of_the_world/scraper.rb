@@ -6,53 +6,34 @@ module TasteOfTheWorld
     end
 
     def self.cuisines
-      url_c = self.get_page.css("div[class='grid slider'] a").map do |r|
-        url_category = r['href']
-        TasteOfTheWorld::Cuisine.new(url_category)
-      end
-      c = self.get_page.css("div[class='grid slider'] a").map do |r|
+      @category = []
+    doc = self.get_page.css("div[class='grid slider'] a").each do |r|
         category = r.text.strip
-        TasteOfTheWorld::Cuisine.new(category)
+        @category << category
       end
-      url_c
-      c
-      binding.pry
+      puts("Hello, Welcome to Taste Of The World.")
+      @category.each.with_index(1) do |name, index|
+        puts "#{index}. #{name}"
+      end
+      puts("Please select a cuisine you'd like to make.")
     end
 
     def self.get_recipe(recipe="https://www.allrecipes.com/recipe/213700/enchiladas-verdes/")
-      doc = Nokogiri::HTML(open("#{recipe}"))
+      Nokogiri::HTML(open("#{recipe}"))
     end
 
     def self.recipe
       doc = self.get_recipe.css("div[class='recipe-content two-col-content karma-main-column']").map do |r|
         name = r.css("h1").text
-        TasteOfTheWorld::Cuisine.new(name)
+        rating = r.css("span[class='review-star-text']").first.text.strip
+        description = r.css("p[class='margin-0-auto']").text
+        info = r.css("div[class='recipe-meta-item']").text.strip.gsub(/\s+/,' ')
+        ingredients = r.css("fieldset[class='ingredients-section__fieldset']").text.strip.gsub(/\s+/,' ')
+        directions = r.css("fieldset[class='instructions-section__fieldset']").text.strip.gsub(/\s+/,' ')
+        nutrition = r.css("section[class='nutrition-section container']").text.strip.gsub(/\s+/,' ')
+        TasteOfTheWorld::Cuisine.new(name,rating,description,info,ingredients,directions,nutrition)
       end
       doc
       binding.pry
     end
-
-
-#COME BACK TO THIS LATER
-    # def self.get_recipes_for(url_style)
-    #   Nokogiri::HTML(open("#{url_style}"))
-    # end
-    #
-    # def self.get_style(url_cuisine)
-    #   doc_1 = url_cuisine.css("div[class='grid slider'] a").map do |r|
-    #     dishes = r.text.strip
-    #     url_dishes = r['href']
-    #     TasteOfTheWorld::Recipes.new(dishes, url_dishes)
-    #   end
-    #   doc_1
-    #   binding.pry
-    # end
-
-  end
 end
-#cuisine names: .css("div[class='grid slider'] a")
-#cuisine URLs: .css("div[class='grid slider'] a").map {|link| url = link['href']}
-#dish names: .css("div[class='grid slider'] a")
-#dish URLs: .css("div[class='grid slider'] a").map {|link| url = link['href']}
-
-#

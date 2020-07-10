@@ -8,7 +8,7 @@ module TasteOfTheWorld
     end
 
     def scrape
-      TasteOfTheWorld::Scraper.cuisines
+      TasteOfTheWorld::Scraper
     end
 
 
@@ -21,6 +21,8 @@ module TasteOfTheWorld
             menu
           when "exit"
             puts "goodbye"
+          when "1"
+            styles
           end
         end
       end
@@ -30,13 +32,9 @@ module TasteOfTheWorld
       print_cuisine
       controls
 
+
       # "Hello, Welcome to Taste Of The World."
       # "Please select a cuisine you'd like to make."
-      @input = gets.strip
-
-      dish = TasteOfTheWorld::Cuisine.find(@input.to_i)
-
-      print_dishes(dish)
 
       # #=> dishes will vary by the first option selected.
       # # "What kind of dish would you like to make?"
@@ -57,17 +55,13 @@ module TasteOfTheWorld
     end
 
     def print_cuisine
-      puts("Hello, Welcome to Taste Of The World.")
-      TasteOfTheWorld::Scraper.cuisines.each.with_index(1) do |name, index|
-        puts "#{index}. #{name}"
-      end
-      puts("Please select a cuisine you'd like to make.")
+      TasteOfTheWorld::Scraper.cuisines
     end
 
-    def print_dishes(dish)
-      puts ("What kind of dish would you like to make?")
+    def print_style(style)
+      puts ("What kind of style would you like to make?")
       TasteOfTheWorld::Cuisine.all.each.with_index(1) do |name, index|
-        puts "#{index}. #{name.dishes}"
+        puts "#{index}. #{name.style}"
       end
       puts("Please select the kind of dish you'd like to make.")
       #=> dishes will vary by the first option selected.
@@ -97,28 +91,25 @@ module TasteOfTheWorld
       # 4. carne asada
       # -----------------------------------------
 
-    # def print_recipe(r)
-    #   puts <<-RECIPE
-    #   -----------------------------------------
-    #   NAME: #{r.name}
-    #   Chef: #{r.chef}
-    #   Rating: #{r.rating}
-    #   Number of Ratings: #{r.n_ratings}
-    #   Description: #{r.description}
-    #   -----------------Basic info--------------
-    #   Prep: #{r.prep_time}
-    #   Cook: #{r.cook_time}
-    #   servings: #{r.servings}
-    #   -----------------Ingredients-------------
-    #   #{r.ingredientse}
-    #   -----------------Directions--------------
-    #   #{r.directions}
-    #   -----------------Nutrition Facts---------
-    #   Per Serving: #{r.nutrition}
-    #   -----------------------------------------
-    #   "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
-    #   RECIPE
-    #   #=> recipes will vary from first, second and third option.
+    def print_recipe(r)
+      puts <<-RECIPE
+      -----------------------------------------
+      NAME: #{r.name}
+      Rating: #{r.rating}
+      Description: #{r.description}
+      -----------------Basic info--------------
+      INFO: #{r.info}
+      -----------------Ingredients-------------
+      #{r.ingredients}
+      -----------------Directions--------------
+      #{r.directions}
+      -----------------Nutrition Facts---------
+      #{r.nutrition}
+      -----------------------------------------
+      "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
+      RECIPE
+    end
+      #=> recipes will vary from first, second and third option.
     #   # -----------------------------------------
     #   # NAME: Enchiladas
     #   # Chef: PattiVerde
@@ -143,7 +134,6 @@ module TasteOfTheWorld
     #   # 559.4 calories; 37.1 g protein; 48.9 g carbohydrates; 84 mg cholesterol; 1344 mg sodium.
     #   # -----------------------------------------
     #   # "To return to the previous selections type "return". To return to the main menu type "menu". To close this application type "exit""
-    # end
     #
   end
 end
