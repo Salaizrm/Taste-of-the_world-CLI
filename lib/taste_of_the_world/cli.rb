@@ -2,37 +2,58 @@ module TasteOfTheWorld
   class CLI
 
     def start
+      scrape
       menu
     end
 
+    def controls
+      if @input == "exit"
+        puts ""
+        puts "Goodbye! Hope to assist you again! New recipes may be available next time!"
+        exit
+      elsif @input == ""
+        puts ""
+        puts "Sorry I dont understand that."
+        menu
+      end
+    end
+
     def scrape
+      TasteOfTheWorld::Cuisine
       TasteOfTheWorld::Scraper
     end
 
     def menu
-      scrape
       puts"Hello, Welcome to Taste Of The World."
       puts"-------------------------------------"
       print_categories
       puts"-------------------------------------"
       puts"Please select a cuisine you'd like to make."
 
-      input = gets.strip.to_i
-      category_url = @category_url[input-1]
+      @input = gets.strip
+      controls
+      category_url = @category_url[@input.to_i-1]
+      puts""
       puts"Please Select a style of dish to make."
       puts"-------------------------------------"
       print_style(category_url)
       puts"-------------------------------------"
+      puts"Please Select a style of dish to make."
 
-      input = gets.strip.to_i
-      style_url = @style_url[input-1]
+      @input = gets.strip
+      controls
+      style_url = @style_url[@input.to_i-1]
+      puts""
       puts"Select a recipe you'd like to make"
       puts"-------------------------------------"
       print_recipes(style_url)
+      puts"-------------------------------------"
+      puts"Select a recipe you'd like to make"
 
-      input = gets.strip.to_i
-      recipe = @recipes_url[input-1]
-      print_recipe(r)
+      @input = gets.strip
+      controls
+      recipe = @recipes_url[@input.to_i-1]
+      print_recipe(recipe)
 
     end
 
@@ -46,6 +67,7 @@ module TasteOfTheWorld
         @category_url << category_url
       end
       @category.each.with_index(1) do |name, index|
+        puts ""
         puts "#{index}. #{name}"
       end
     end
@@ -60,6 +82,7 @@ module TasteOfTheWorld
         @style_url << style_url
       end
       @style.each.with_index(1) do |name, index|
+        puts ""
         puts "#{index}. #{name}"
       end
     end
@@ -74,26 +97,28 @@ module TasteOfTheWorld
         @recipes_url << recipes_url
       end
       @recipes.each.with_index(1) do |name, index|
+        puts ""
         puts "#{index}. #{name}"
       end
     end
 
     def print_recipe(recipe)
       TasteOfTheWorld::Cuisine.recipe(recipe).each do |r|
-      puts "-----------------------------------------"
-      puts "NAME: #{r.name}"
-      puts "Rating: #{r.rating}"
-      puts "Description: #{r.description}"
-      puts "-----------------Basic info--------------"
-      puts "INFO: #{r.info}"
-      puts "-----------------Ingredients-------------"
-      puts "#{r.ingredients}"
-      puts "-----------------Directions--------------"
-      puts "#{r.directions}"
-      puts "-----------------Nutrition Facts---------"
-      puts "#{r.nutrition}"
-      puts "-----------------------------------------"
-      puts "To return to the previous selections type return. To return to the main menu type menu. To close this application type exit"
+        puts""
+        puts "-----------------------------------------"
+        puts "NAME: #{r.name}"
+        puts "Rating: #{r.rating}"
+        puts "Description: #{r.description}"
+        puts "-----------------Basic info--------------"
+        puts "INFO: #{r.info}"
+        puts "-----------------Ingredients-------------"
+        puts "#{r.ingredients}"
+        puts "-----------------Directions--------------"
+        puts "#{r.directions}"
+        puts "-----------------Nutrition Facts---------"
+        puts "#{r.nutrition}"
+        puts "-----------------------------------------"
+        puts "To return to the previous selections type return. To return to the main menu type menu. To close this application type exit"
     end
   end
 
