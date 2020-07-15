@@ -21,13 +21,12 @@ module TasteOfTheWorld
       puts"Hello, Welcome to Taste Of The World."
       puts"-------------------------------------"
       print_category
-      # TasteOfTheWorld::Category.print_category
       puts"-------------------------------------"
       puts"Please select a cuisine you'd like to make."
 
-      @input = gets.strip.to_i
+      @input = gets.strip
       controls
-      category_url = @category_url[@input-1]
+      category_url = @category_url[@input.to_i-1]
       puts""
       puts"Please Select a style of dish to make."
       puts"-------------------------------------"
@@ -35,9 +34,9 @@ module TasteOfTheWorld
       puts"-------------------------------------"
       puts"Please Select a style of dish to make."
 
-      @input = gets.strip.to_i
+      @input = gets.strip
       controls
-      style_url = @style_url[@input-1]
+      style_url = @style_url[@input.to_i-1]
       puts""
       puts"Select a recipe you'd like to make"
       puts"-------------------------------------"
@@ -47,7 +46,7 @@ module TasteOfTheWorld
 
       @input = gets.strip
       controls
-      recipe = @recipes_url[@input.to_i-1]
+      full_recipe = @recipes_url[@input.to_i-1]
       print_recipe(recipe)
 
     end
@@ -55,8 +54,8 @@ module TasteOfTheWorld
     def print_category
       @category = []
       @category_url = []
-    TasteOfTheWorld::Scraper.get_category.css("div[class='fixed-recipe-card__info']").each do |r|
-        category = r.text.strip.gsub(/\s+/,' ')
+    TasteOfTheWorld::Scraper.get_category.css("div[class='grid slider'] a").each do |r|
+        category = r.text.strip
         category_url = r['href']
         @category << category
         @category_url << category_url
@@ -70,11 +69,11 @@ module TasteOfTheWorld
     def print_style(category_url)
       @style = []
       @style_url = []
-    TasteOfTheWorld::Scraper.get_style(category_url).css("div[class='fixed-recipe-card__info']").each do |r|
-        style = r.text.strip.gsub(/\s+/,' ')
+    TasteOfTheWorld::Scraper.get_style(category_url).css("div[class='grid slider'] a").each do |r|
+        style = r.text.strip
         style_url = r['href']
-        @style << recipes
-        @style << recipes_url
+        @style << style
+        @style_url << style_url
       end
       @style.each.with_index(1) do |name, index|
         puts ""
@@ -97,25 +96,25 @@ module TasteOfTheWorld
       end
     end
 
-    def print_recipe(recipe)
-      TasteOfTheWorld::Cuisine.recipe(recipe).each do |r|
-        puts""
-        puts "-----------------------------------------"
-        puts "NAME: #{r.name}"
-        puts "Rating: #{r.rating}"
-        puts "Description: #{r.description}"
-        puts "-----------------Basic info--------------"
-        puts "INFO: #{r.info}"
-        puts "-----------------Ingredients-------------"
-        puts "#{r.ingredients}"
-        puts "-----------------Directions--------------"
-        puts "#{r.directions}"
-        puts "-----------------Nutrition Facts---------"
-        puts "#{r.nutrition}"
-        puts "-----------------------------------------"
-        puts "To return to the previous selections type return. To return to the main menu type menu. To close this application type exit"
-    end
-  end
+  #   def print_recipe(recipe)
+  #     TasteOfTheWorld::Cuisine.recipe(recipe).each do |r|
+  #       puts""
+  #       puts "-----------------------------------------"
+  #       puts "NAME: #{r.name}"
+  #       puts "Rating: #{r.rating}"
+  #       puts "Description: #{r.description}"
+  #       puts "-----------------Basic info--------------"
+  #       puts "INFO: #{r.info}"
+  #       puts "-----------------Ingredients-------------"
+  #       puts "#{r.ingredients}"
+  #       puts "-----------------Directions--------------"
+  #       puts "#{r.directions}"
+  #       puts "-----------------Nutrition Facts---------"
+  #       puts "#{r.nutrition}"
+  #       puts "-----------------------------------------"
+  #       puts "To return to the previous selections type return. To return to the main menu type menu. To close this application type exit"
+  #   end
+  # end
 
   end
 end
