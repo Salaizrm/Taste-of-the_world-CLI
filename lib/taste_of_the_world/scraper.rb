@@ -5,8 +5,6 @@ module TasteOfTheWorld
       Nokogiri::HTML(open("https://www.allrecipes.com/recipes/86/world-cuisine/"))
     end
 
-
-
     def self.get_style(category_url)
       Nokogiri::HTML(open("#{category_url}"))
     end
