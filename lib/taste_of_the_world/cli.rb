@@ -6,11 +6,11 @@ module TasteOfTheWorld
     end
 
     def controls
-      if input == "exit"
+      if @input == "exit"
         puts ""
         puts "Goodbye! Hope to assist you again! New recipes may be available next time!"
         exit
-      elsif input == ""
+      elsif @input == ""
         puts ""
         puts "Sorry I dont understand that."
         menu
@@ -20,23 +20,24 @@ module TasteOfTheWorld
     def menu
       puts"Hello, Welcome to Taste Of The World."
       puts"-------------------------------------"
-      TasteOfTheWorld::Category.print_category
+      print_category
+      # TasteOfTheWorld::Category.print_category
       puts"-------------------------------------"
       puts"Please select a cuisine you'd like to make."
 
-      input = gets.strip
+      @input = gets.strip.to_i
       controls
-      category_url = @category_url[input.to_i-1]
+      category_url = @category_url[@input-1]
       puts""
       puts"Please Select a style of dish to make."
       puts"-------------------------------------"
-      TasteOfTheWorld::Category.print_style(category_url)
+      print_style(category_url)
       puts"-------------------------------------"
       puts"Please Select a style of dish to make."
 
-      input = gets.strip
+      @input = gets.strip.to_i
       controls
-      style_url = @style_url[input.to_i-1]
+      style_url = @style_url[@input-1]
       puts""
       puts"Select a recipe you'd like to make"
       puts"-------------------------------------"
@@ -51,6 +52,35 @@ module TasteOfTheWorld
 
     end
 
+    def print_category
+      @category = []
+      @category_url = []
+    TasteOfTheWorld::Scraper.get_category.css("div[class='fixed-recipe-card__info']").each do |r|
+        category = r.text.strip.gsub(/\s+/,' ')
+        category_url = r['href']
+        @category << category
+        @category_url << category_url
+      end
+      @category.each.with_index(1) do |name, index|
+        puts ""
+        puts "#{index}. #{name}"
+      end
+    end
+
+    def print_style(category_url)
+      @style = []
+      @style_url = []
+    TasteOfTheWorld::Scraper.get_style(category_url).css("div[class='fixed-recipe-card__info']").each do |r|
+        style = r.text.strip.gsub(/\s+/,' ')
+        style_url = r['href']
+        @style << recipes
+        @style << recipes_url
+      end
+      @style.each.with_index(1) do |name, index|
+        puts ""
+        puts "#{index}. #{name}"
+      end
+    end
 
     def print_recipes(style_url)
       @recipes = []
