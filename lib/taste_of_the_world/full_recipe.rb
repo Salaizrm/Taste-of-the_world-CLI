@@ -1,3 +1,4 @@
+
 module TasteOfTheWorld
   class Cuisine
 
