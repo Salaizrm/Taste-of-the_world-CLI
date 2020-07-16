@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Robert Salaiz'"]
   spec.email         = ["'work.salaizrm@gmail.com'"]
 
-  spec.summary       = %q{Here is a summary until i write a better one.}
-  spec.description   = %q{Here is a description until i write a better one.}
+  spec.summary       = %q{An app that helps you make any kind of dish from all over the world.}
+  spec.description   = %q{This app allows you to select a cuisine(mexican,etc), style(Appetizer,etc.) and then select the dish you wanna make.}
   spec.homepage      = "https://github.com/Salaizrm/taste-of-the-world-CLI"
   spec.license       = "MIT"
 

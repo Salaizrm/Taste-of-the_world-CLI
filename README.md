@@ -1,8 +1,9 @@
 # TasteOfTheWorld
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/taste/of/the/world`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+With this application you can view recipes from all over the world. First, it will ask you what kind of food youe hungry for, American, Mexican, Chinese and so many more options.
+Second, it'll ask you to select a style you wanna make. Appetizer, Desert, Dinner and other niche styles.
+third, you can then select what dish you wanna make it will give you a the recipe name and a small description with it.
+lastly, whatever recipe you selected will be shown with all the details on how to make it.
 
 ## Installation
 

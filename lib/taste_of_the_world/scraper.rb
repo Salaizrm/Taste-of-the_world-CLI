@@ -6,7 +6,7 @@ module TasteOfTheWorld
     end
 
     def self.scrape_category
-    self.get_category.css("div[class='grid slider'] a").each do |r|
+    self.get_category.css("div[class='grid slider'] a").map do |r|
         category = r.text.strip
         category_url = r['href']
         TasteOfTheWorld::Category.new(category, category_url)
@@ -25,8 +25,16 @@ module TasteOfTheWorld
       end
     end
 
-    def self.get_recipes(recipes_url)
-      Nokogiri::HTML(open("#{recipes_url}"))
+    def self.get_recipes(style_url)
+      Nokogiri::HTML(open("#{style_url}"))
+    end
+
+    def self.scrape_recipes(style_url)
+    self.get_style(category_url).css("div[class='grid slider'] a").each do |r|
+        style = r.text.strip
+        style_url = r['href']
+        TasteOfTheWorld::Style.new(recipes, recipes_url)
+      end
     end
 
     def self.get_full_recipe(full_recipe_url)

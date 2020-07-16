@@ -23,5 +23,25 @@ module TasteOfTheWorld
       @@all
     end
 
+    def print_recipe(recipe)
+      self.all do |r|
+        puts""
+        puts "-----------------------------------------"
+        puts "NAME: #{r.name}"
+        puts "Rating: #{r.rating}"
+        puts "Description: #{r.description}"
+        puts "-----------------Basic info--------------"
+        puts "INFO: #{r.info}"
+        puts "-----------------Ingredients-------------"
+        puts "#{r.ingredients}"
+        puts "-----------------Directions--------------"
+        puts "#{r.directions}"
+        puts "-----------------Nutrition Facts---------"
+        puts "#{r.nutrition}"
+        puts "-----------------------------------------"
+        puts "To return to the main menu type menu. To close this application type exit"
+      end
+    end
+
   end
 end
