@@ -3,8 +3,6 @@ module TasteOfTheWorld
   class FullRecipe
 
     attr_accessor :name, :rating, :description, :info, :ingredients, :directions, :nutrition
-    # :name, :chef, :rating, :n_ratings, :description, :summary, :ingredients, :directions, :nutrition
-    #=> Summary includes prep time, cooking time, and servings
 
     @@all = []
 
@@ -17,10 +15,6 @@ module TasteOfTheWorld
       @directions = directions
       @nutrition = nutrition
       @@all << self
-      #attributes.each do |k, v|
-        #if self.send("#k"=,v)
-        #end
-      #end
     end
 
     def self.all

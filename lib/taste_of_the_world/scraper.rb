@@ -37,9 +37,6 @@ module TasteOfTheWorld
       end
     end
 
-# doc.css("article[class='fixed-recipe-card']").css("span[class='fixed-recipe-card__title-link']").first.text
-# doc = Nokogiri::HTML(open("https://www.allrecipes.com/recipes/1470/world-cuisine/latin-american/mexican/authentic/"))
-
     def self.get_full_recipe(recipes_url)
       Nokogiri::HTML(open("#{recipes_url}"))
     end

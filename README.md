@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After installing to run this application type './bin/taste-of-the-world'
 
 ## Development
 
