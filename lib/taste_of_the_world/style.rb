@@ -1,5 +1,5 @@
 module TasteOfTheWorld
-  class Style < Category
+  class Style
 
     attr_accessor :style, :style_url
 
@@ -15,9 +15,8 @@ module TasteOfTheWorld
       @@all
     end
 
-    def self.print_style(category_url)
-      TasteOfTheWorld::Scraper.scrape_style(category_url)
-      self.all.each.with_index(1) do |name, index|
+    def self.print_style
+      all.each.with_index(1) do |name, index|
         puts ""
         puts "#{index}. #{name.style}"
       end

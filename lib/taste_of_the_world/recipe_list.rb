@@ -1,5 +1,5 @@
 module TasteOfTheWorld
-  class Recipes
+  class RecipeList
 
     attr_accessor :recipes, :recipes_url
 
@@ -15,8 +15,7 @@ module TasteOfTheWorld
       @@all
     end
 
-    def self.print_style(style_url)
-      TasteOfTheWorld::Scraper.scrape_recipes(style_url)
+    def self.print_recipes
       self.all.each.with_index(1) do |name, index|
         puts ""
         puts "#{index}. #{name.recipes}"

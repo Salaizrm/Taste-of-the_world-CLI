@@ -17,14 +17,18 @@ module TasteOfTheWorld
       @directions = directions
       @nutrition = nutrition
       @@all << self
+      #attributes.each do |k, v|
+        #if self.send("#k"=,v)
+        #end
+      #end
     end
 
     def self.all
       @@all
     end
 
-    def print_recipe(recipe)
-      self.all do |r|
+    def print_full_recipe
+      self.all.each do |r|
         puts""
         puts "-----------------------------------------"
         puts "NAME: #{r.name}"
