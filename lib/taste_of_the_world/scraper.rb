@@ -30,19 +30,22 @@ module TasteOfTheWorld
     end
 
     def self.scrape_recipes(style_url)
-    self.get_recipes(style_url).css("div[class='grid slider'] a").map do |r|
-        recipes = r.text.strip
-        recipes_url = r['href']
+    self.get_recipes(style_url).css("div[class='fixed-recipe-card__info']").map do |r|
+        recipes = r.css("span[class='fixed-recipe-card__title-link']").text.strip
+        recipes_url = r.css("a").map{|x| x['href']}.first
         TasteOfTheWorld::RecipeList.new(recipes, recipes_url)
       end
     end
+
+# doc.css("article[class='fixed-recipe-card']").css("span[class='fixed-recipe-card__title-link']").first.text
+# doc = Nokogiri::HTML(open("https://www.allrecipes.com/recipes/1470/world-cuisine/latin-american/mexican/authentic/"))
 
     def self.get_full_recipe(recipes_url)
       Nokogiri::HTML(open("#{recipes_url}"))
     end
 
     def self.scrape_full_recipe(recipes_url)
-      self.get_recipe(recipe).css("div[class='recipe-content two-col-content karma-main-column']").map do |r|
+      self.get_full_recipe(recipes_url).css("div[class='recipe-content two-col-content karma-main-column']").map do |r|
         name = r.css("h1").text
         rating = r.css("span[class='review-star-text']").first.text.strip
         description = r.css("p[class='margin-0-auto']").text

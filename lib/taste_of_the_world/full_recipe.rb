@@ -27,21 +27,26 @@ module TasteOfTheWorld
       @@all
     end
 
-    def print_full_recipe
+    def self.print_full_recipe
       self.all.each do |r|
         puts""
         puts "-----------------------------------------"
         puts "NAME: #{r.name}"
-        puts "Rating: #{r.rating}"
+        puts "#{r.rating}"
+        puts ""
         puts "Description: #{r.description}"
         puts "-----------------Basic info--------------"
-        puts "INFO: #{r.info}"
+        puts "#{r.info}"
+        puts ""
         puts "-----------------Ingredients-------------"
         puts "#{r.ingredients}"
+        puts ""
         puts "-----------------Directions--------------"
         puts "#{r.directions}"
+        puts ""
         puts "-----------------Nutrition Facts---------"
         puts "#{r.nutrition}"
+        puts ""
         puts "-----------------------------------------"
         puts "To return to the main menu type menu. To close this application type exit"
       end
