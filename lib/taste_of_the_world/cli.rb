@@ -12,9 +12,13 @@ module TasteOfTheWorld
       puts"-------------------------------------"
       puts"Please select a cuisine you'd like to make."
 
-      input = gets.strip.to_i
-      category_url = TasteOfTheWorld::Category.all[input-1].category_url
+      input = gets.strip
+      if input == "exit"
+        exit
+      end
+      category_url = TasteOfTheWorld::Category.all[input.to_i-1].category_url
       TasteOfTheWorld::Scraper.scrape_style(category_url)
+
 
       puts""
       puts"Please Select a style of dish to make."
@@ -23,8 +27,11 @@ module TasteOfTheWorld
       puts"-------------------------------------"
       puts"Please Select a style of dish to make."
 
-      input = gets.strip.to_i
-      style_url = TasteOfTheWorld::Style.all[input-1].style_url
+      input = gets.strip
+      if input == "exit"
+        exit
+      end
+      style_url = TasteOfTheWorld::Style.all[input.to_i-1].style_url
       TasteOfTheWorld::Scraper.scrape_recipes(style_url)
 
       puts""
@@ -34,8 +41,11 @@ module TasteOfTheWorld
       puts"-------------------------------------"
       puts"Select a recipe you'd like to make"
 
-      input = gets.strip.to_i
-      recipes_url = TasteOfTheWorld::RecipeList.all[input-1].recipes_url
+      input = gets.strip
+      if input == "exit"
+        exit
+      end
+      recipes_url = TasteOfTheWorld::RecipeList.all[input.to_i-1].recipes_url
 
       TasteOfTheWorld::Scraper.scrape_full_recipe(recipes_url)
       TasteOfTheWorld::FullRecipe.print_full_recipe
