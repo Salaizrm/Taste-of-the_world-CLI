@@ -15,8 +15,12 @@ module TasteOfTheWorld
       @@all
     end
 
+    def self.find_by_url(url)
+      self.all.detect {|recipelist| recipelist.recipes_url == url}
+    end
+
     def self.print_recipes
-      self.all.each.with_index(1) do |name, index|
+      all.each.with_index(1) do |name, index|
         puts ""
         puts "#{index}. #{name.recipes}"
       end

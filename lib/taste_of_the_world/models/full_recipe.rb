@@ -22,7 +22,7 @@ module TasteOfTheWorld
     end
 
     def self.print_full_recipe
-      self.all.each do |r|
+      all.each do |r|
         puts""
         puts "-----------------------------------------"
         puts "NAME: #{r.name}"

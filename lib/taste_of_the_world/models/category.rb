@@ -16,7 +16,6 @@ module TasteOfTheWorld
     end
 
     def self.print_category
-      TasteOfTheWorld::Scraper.scrape_category
       all.each.with_index(1) do |name, index|
         puts ""
         puts "#{index}. #{name.category}"

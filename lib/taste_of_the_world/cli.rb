@@ -2,6 +2,7 @@ module TasteOfTheWorld
   class CLI
 
     def start
+      TasteOfTheWorld::Scraper.scrape_category
       menu
     end
 
@@ -13,11 +14,14 @@ module TasteOfTheWorld
       puts"Please select a cuisine you'd like to make."
 
       input = gets.strip
-      if input == "exit"
+      if input == "menu"
+        menu
+      elsif input == "exit"
         exit
+      else input.to_i > 0
+        category_url = TasteOfTheWorld::Category.all[input.to_i-1].category_url
+        TasteOfTheWorld::Scraper.scrape_style(category_url)
       end
-      category_url = TasteOfTheWorld::Category.all[input.to_i-1].category_url
-      TasteOfTheWorld::Scraper.scrape_style(category_url)
 
 
       puts""
