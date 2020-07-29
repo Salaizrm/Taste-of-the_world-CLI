@@ -6,7 +6,7 @@ module TasteOfTheWorld
     end
 
     def self.scrape_category
-    self.get_category.css("div[class='grid slider'] a").map do |r|
+    self.get_category.css("div[class='grid slider'] a").each do |r|
         category = r.text.strip
         category_url = r['href']
         TasteOfTheWorld::Category.new(category, category_url)
@@ -18,7 +18,7 @@ module TasteOfTheWorld
     end
 
     def self.scrape_style(category_url)
-    self.get_style(category_url).css("div[class='grid slider'] a").map do |r|
+    self.get_style(category_url).css("div[class='grid slider'] a").each do |r|
         style = r.text.strip
         style_url = r['href']
         TasteOfTheWorld::Style.new(style, style_url)
@@ -30,7 +30,7 @@ module TasteOfTheWorld
     end
 
     def self.scrape_recipes(style_url)
-    self.get_recipes(style_url).css("div[class='fixed-recipe-card__info']").map do |r|
+    self.get_recipes(style_url).css("div[class='fixed-recipe-card__info']").each do |r|
         recipes = r.css("span[class='fixed-recipe-card__title-link']").text.strip
         recipes_url = r.css("a").map{|x| x['href']}.first
         TasteOfTheWorld::RecipeList.new(recipes, recipes_url)
@@ -42,7 +42,7 @@ module TasteOfTheWorld
     end
 
     def self.scrape_full_recipe(recipes_url)
-      self.get_full_recipe(recipes_url).css("div[class='recipe-content two-col-content karma-main-column']").map do |r|
+      self.get_full_recipe(recipes_url).css("div[class='recipe-content two-col-content karma-main-column']").each do |r|
         name = r.css("h1").text
         rating = r.css("span[class='review-star-text']").first.text.strip
         description = r.css("p[class='margin-0-auto']").text
