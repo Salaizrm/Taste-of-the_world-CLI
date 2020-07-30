@@ -15,6 +15,10 @@ module TasteOfTheWorld
       @@all
     end
 
+    def self.delete
+      @@all.clear
+    end
+
     def self.print_style
       all.each.with_index(1) do |name, index|
         puts ""

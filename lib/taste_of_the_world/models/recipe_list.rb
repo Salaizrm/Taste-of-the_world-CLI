@@ -15,6 +15,10 @@ module TasteOfTheWorld
       @@all
     end
 
+    def self.delete
+      @@all.clear
+    end
+
     def self.find_by_url(url)
       self.all.detect {|recipelist| recipelist.recipes_url == url}
     end

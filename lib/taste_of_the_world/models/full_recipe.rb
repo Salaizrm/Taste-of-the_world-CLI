@@ -21,6 +21,10 @@ module TasteOfTheWorld
       @@all
     end
 
+    def self.delete
+      @@all.clear
+    end
+
     def self.print_full_recipe
       all.each do |r|
         puts""
